@@ -60,7 +60,7 @@ def transform_frames(frames, device, size=256):
 
 
 
-def get_transform(size=256):
+def get_transform(size=512):
     t = transforms.Compose([
         transforms.Resize(size=(size, size)),
         transforms.ToTensor(),

@@ -25,4 +25,3 @@ def CDF(C, B):
     return C
     
 #C = mat['C']
-#CDF(C)

@@ -62,7 +62,7 @@ class ProcessMasks():
         p = self.pulse.get_pulse(self.signal)
         p = moving_avg(p, 6)
         hr = self.pulse.get_rfft_hr(p)
-        if len(self.hrs) > 300: self.hrs.pop(0)
+        if len(self.hrs) > 3000: self.hrs.pop(0)
 
         self.hrs.append(hr)
         if self.plot_pipe is not None and self.stop:
@@ -168,7 +168,3 @@ class ProcessMasks():
         plt.tight_layout() 
         plt.savefig(f'results.png')
         plt.close()
-
-            
-                
-

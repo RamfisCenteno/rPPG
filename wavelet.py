@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Mar 18 11:15:49 2019
-
 @author: nasir
-
 Implements
 Wavelet for post processing of pulse signal
-
 """
 from scipy.signal import convolve2d
 import numpy as np

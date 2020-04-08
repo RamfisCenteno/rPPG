@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib
 matplotlib.use('TkAgg')
@@ -102,6 +101,3 @@ class DynamicPlot():
         """
         np.save('pulse', self.pulse_to_plot)
         plt.close('all')
-        
-
-
