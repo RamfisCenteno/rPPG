@@ -9,7 +9,7 @@ plt.ion()
 class DynamicPlot():    
     def __init__(self, signal_size, bs):
         self.batch_size = bs
-        self.signal_size = signal_size
+        self.signal_size = signal_size*10
         self.launched = False
 
     def launch_fig(self):
@@ -53,7 +53,7 @@ class DynamicPlot():
         hr_text = 'HR: NaN'
         self.hr_texts.set_text(hr_text)
 
-        scaled = np.zeros(10)
+        scaled = np.zeros(100)
         for i in range(0, len(scaled)):
             self.pulse_to_plot[0:self.signal_size-1] = self.pulse_to_plot[1:]
             self.pulse_to_plot[-1] = scaled[i]
@@ -66,13 +66,13 @@ class DynamicPlot():
 
     def update_data(self, p, hrs):
 
-        hr_fft = moving_avg(hrs, 3)[-1] if len(hrs) > 5 else hrs[-1]
+            hr_fft = moving_avg(hrs, 3)[-1] if len(hrs)   5 else hrs[-1]
         hr_text = 'HR: ' + str(int(hr_fft))
         self.hr_texts.set_text(hr_text)
 
         # ma = moving_avg(p[-self.batch_size:], 6)
         batch = p[-self.batch_size:]
-        decimated_p = decimate(batch, 3)
+        decimated_p = decimate(batch, 1)
         # filterd_p =  medfilt(decimated_p, 5)
         scaled = scale_pulse(decimated_p)
         for i in range(0, len(scaled)):
@@ -100,4 +100,5 @@ class DynamicPlot():
         saves numpy array of rPPG signal as pulse
         """
         np.save('pulse', self.pulse_to_plot)
+        np.save('hrs', self.hrs_to_plot)
         plt.close('all')

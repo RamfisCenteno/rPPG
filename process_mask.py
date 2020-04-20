@@ -61,6 +61,7 @@ class ProcessMasks():
         self.signal[size-b_size:] = batch_mean
         p = self.pulse.get_pulse(self.signal)
         p = moving_avg(p, 6)
+        self.p = p
         hr = self.pulse.get_rfft_hr(p)
         if len(self.hrs) > 3000: self.hrs.pop(0)
 
@@ -142,7 +143,9 @@ class ProcessMasks():
         """
         np.save('hrs', np.array(self.hrs))
         np.save('fft_spec', np.array(self.pulse.fft_spec))
-
+#         np.save('p', np.array(self.p))
+#         np.save('hr', np.array(self.hr))
+        
     def savePlot(self, path):
         if self.save_results == False:
             return
@@ -160,10 +163,10 @@ class ProcessMasks():
         ax1.set_ylim([20, 180]) 
         ax1.plot(moving_avg(self.hrs, 6))
     
-        # ax3 = plt.subplot(1,2,2)
-        # ax3.set_title('GT')
-        # ax3.set_ylim([20, 180])
-        # ax3.plot(gt_HR[8:])
+        ax3 = plt.subplot(1,2,2)
+        ax3.set_title('GT')
+        ax3.set_ylim([20, 180])
+        ax3.plot(self.pulse.fft_spec)
 
         plt.tight_layout() 
         plt.savefig(f'results.png')

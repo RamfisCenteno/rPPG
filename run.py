@@ -49,7 +49,7 @@ def get_args():
     parser = OptionParser()
     parser.add_option('-s', '--source', dest='source', default=0,
                         help='Signal Source: 0 for webcam or file path')
-    parser.add_option('-b', '--batch-size', dest='batchsize', default=100,
+    parser.add_option('-b', '--batch-size', dest='batchsize', default=30,
                         type='int', help='batch size')
     parser.add_option('-f', '--frame-rate', dest='framerate', default=25,
                         help='Frame Rate')
@@ -60,5 +60,5 @@ def get_args():
 if __name__=="__main__":
     args = get_args()
     source = args.source
-    runPOS = RunPOS(1000, args.framerate, args.batchsize, True)
+    runPOS = RunPOS(300, args.framerate, args.batchsize, True)
     runPOS(source)
