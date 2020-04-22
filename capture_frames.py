@@ -21,6 +21,7 @@ class CaptureFrames():
         self.model.eval()
         self.model.to(self.device)
         self.show_mask = show_mask
+        self.fps=[]
         
     def __call__(self, pipe, source):
         self.pipe = pipe
@@ -33,7 +34,7 @@ class CaptureFrames():
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
-    
+        fps = []
         camera = cv2.VideoCapture(source)
         time.sleep(1)
         self.model.eval()
@@ -80,17 +81,23 @@ class CaptureFrames():
             if self.frames_count % 30 == 29:
                 time_2 = time.time()
                 sys.stdout.write(f'\rFPS: {30/(time_2-time_1)}')
+#                 fps = 30/(time_2-time_1)
+                row = [time_1, time_2]
+                fps.append(row)
+#                 self.fps = fps
                 sys.stdout.flush()
                 time_1 = time.time()
 
 
             self.frames_count+=1
-
+            self.fps = fps
+        return self.fps
         self.terminate(camera)
 
     
     def terminate(self, camera):
         self.pipe.send(None)
+        np.save('fps_capture', self.fps)
         cv2.destroyAllWindows()
         camera.release()
         

@@ -13,15 +13,17 @@ import sys
 from optparse import OptionParser
 
 class RunPOS():
-    def __init__(self,  sz=300, fs=28, bs=30, plot=False):
+    def __init__(self, sz=300, fs=28, bs=30, plot=False):
         self.batch_size = bs
         self.frame_rate = fs
         self.signal_size = sz
         self.plot = plot
 
     def __call__(self, source):
-        time1=time.time()
-        
+#         time1=time.time()
+#         timer = []
+#         timer.append(time.time())
+#         print(timer)
         mask_process_pipe, chil_process_pipe = mp.Pipe()
         self.plot_pipe = None
         if self.plot:
@@ -41,9 +43,10 @@ class RunPOS():
         mask_processer.join()
         if self.plot:
             self.plot_process.join()
-        time2=time.time()
-        time2=time.time()
-        print(f'time {time2-time1}')
+#         time2=time.time()
+#         time2=time.time()
+#         print(f'time {time2-time1}')
+#         np.save('time2', self.timer)
 
 def get_args():
     parser = OptionParser()

@@ -4,13 +4,16 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 from utils import *
 from scipy.signal import medfilt, decimate
+from capture_frames import *
+import time
 
 plt.ion()
 class DynamicPlot():    
     def __init__(self, signal_size, bs):
         self.batch_size = bs
-        self.signal_size = signal_size*10
+        self.signal_size = signal_size*5
         self.launched = False
+        self.timer = []
 
     def launch_fig(self):
         self.fig, (self.pulse_ax, self.hr_axis)= plt.subplots(2, 1)
@@ -66,7 +69,7 @@ class DynamicPlot():
 
     def update_data(self, p, hrs):
 
-            hr_fft = moving_avg(hrs, 3)[-1] if len(hrs)   5 else hrs[-1]
+        hr_fft = moving_avg(hrs, 3)[-1] if len(hrs) > 5 else hrs[-1]
         hr_text = 'HR: ' + str(int(hr_fft))
         self.hr_texts.set_text(hr_text)
 
@@ -84,7 +87,6 @@ class DynamicPlot():
             self.update_plot(self.hr_axis, self.hrs_to_plot)
             self.re_draw()
 
-
     def update_plot(self, axis, y_values):
         line = axis.lines[0]
         line.set_xdata(np.arange(len(y_values)))
@@ -94,11 +96,16 @@ class DynamicPlot():
     def re_draw(self):
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
+        self.timer.append(time.time())
+        self.timer=self.timer
     
     def terminate(self):
         """
         saves numpy array of rPPG signal as pulse
         """
         np.save('pulse', self.pulse_to_plot)
+#         np.save('row', self.row, allow_pickle=True)
         np.save('hrs', self.hrs_to_plot)
+        np.save('time', self.timer)
+#         np.save('fps', self.fps)
         plt.close('all')
