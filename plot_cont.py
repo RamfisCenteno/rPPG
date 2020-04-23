@@ -11,7 +11,7 @@ plt.ion()
 class DynamicPlot():    
     def __init__(self, signal_size, bs):
         self.batch_size = bs
-        self.signal_size = signal_size*5
+        self.signal_size = signal_size*10
         self.launched = False
         self.timer = []
 
@@ -29,7 +29,7 @@ class DynamicPlot():
         self.pulse_ax.plot(self.pulse_to_plot)
         self.hr_axis.plot(self.hrs_to_plot)
 
-        self.pulse_ax.set_ylim(-3,3)
+        self.pulse_ax.set_ylim(-1.5,1.5)
         self.hr_axis.set_ylim(0,180)
         self.launched = True
         
