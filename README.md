@@ -35,7 +35,7 @@ This code runs on cuda enabled device at 30 FPS and estimates heartbeat in one s
 
 Clone this repository.
 
-        git clone https://github.com/nasir6/rPPG.git
+        git clone https://github.com/stephenparvaresh/rPPG/blob/master/README.md
 
 To run with webcam:
 
