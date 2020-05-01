@@ -8,6 +8,8 @@ from torch.autograd import Variable
 from PIL import Image, ImageFilter
 import time
 import sys
+import os
+import argparse
 
 class CaptureFrames():
 
@@ -35,6 +37,25 @@ class CaptureFrames():
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
         fps = []
+        
+#         ap = argparse.ArgumentParser()
+# #         ap.add_argument("-v", "--video", help = "path to the (optional) video file")
+#         args = vars(ap.parse_args())
+
+
+#         if not args.get("video", False):
+#             from_webcam = True
+#             camera = cv2.VideoCapture(source)
+# #             start = 0
+# #             end = 450
+        
+#         # otherwise, load the video
+#         else:
+#             camera = cv2.VideoCapture(args["video"])
+
+#         video_file_path = args["video"]
+#         video_file_name = os.path.basename(video_file_path)
+        
         camera = cv2.VideoCapture(source)
         time.sleep(1)
         self.model.eval()
@@ -101,6 +122,3 @@ class CaptureFrames():
         cv2.destroyAllWindows()
         camera.release()
         
-
-
-

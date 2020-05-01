@@ -20,10 +20,6 @@ class RunPOS():
         self.plot = plot
 
     def __call__(self, source):
-#         time1=time.time()
-#         timer = []
-#         timer.append(time.time())
-#         print(timer)
         mask_process_pipe, chil_process_pipe = mp.Pipe()
         self.plot_pipe = None
         if self.plot:
@@ -43,10 +39,6 @@ class RunPOS():
         mask_processer.join()
         if self.plot:
             self.plot_process.join()
-#         time2=time.time()
-#         time2=time.time()
-#         print(f'time {time2-time1}')
-#         np.save('time2', self.timer)
 
 def get_args():
     parser = OptionParser()
@@ -56,6 +48,7 @@ def get_args():
                         type='int', help='batch size')
     parser.add_option('-f', '--frame-rate', dest='framerate', default=25,
                         help='Frame Rate')
+#     parser.add_option("-v", "--video", help = "path to the (optional) video file")
 
     (options, _) = parser.parse_args()
     return options
