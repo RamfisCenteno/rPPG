@@ -37,9 +37,13 @@ Clone this repository.
 
         git clone https://github.com/nasir6/rPPG.git
 
-To run
+To run with webcam:
 
         cd rPPG
-        python3 run.py --source=0 --frame-rate=25
+        python3 run.py
 
+To run with video:
+        
+        cd rPPG
+        python3 run.py --source='video path'
 
