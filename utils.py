@@ -72,7 +72,7 @@ def transform_single_frame(frames, size=256):
     f = get_transform()
     shape = frames.shape
 
-    tranformed_frames = np.zeros((shape[0], 3,  shape[1], shape[2]))
+    tranformed_frames = np.zeros((shape[0], shape[3],  shape[1], shape[2]))
 
     for i in range(shape[0]):
         tranformed_frames[i] = f(Image.fromarray(frames[i]))

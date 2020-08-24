@@ -162,6 +162,9 @@ class ProcessMasks():
         ax1.set_title('HR')
         ax1.set_ylim([20, 180]) 
         ax1.plot(moving_avg(self.hrs, 6))
+        plt.tight_layout() 
+        plt.savefig(f'hr.png')
+        plt.close()
     
         ax3 = plt.subplot(1,2,2)
         ax3.set_title('GT')

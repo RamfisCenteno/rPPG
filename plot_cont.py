@@ -11,7 +11,7 @@ plt.ion()
 class DynamicPlot():    
     def __init__(self, signal_size, bs):
         self.batch_size = bs
-        self.signal_size = signal_size*10
+        self.signal_size = signal_size*3
         self.launched = False
         self.timer = []
 
